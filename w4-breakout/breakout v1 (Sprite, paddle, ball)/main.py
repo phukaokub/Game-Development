@@ -24,12 +24,12 @@ class GameMain:
         self.max_frame_rate = 60
         self.screen = pygame.display.set_mode((WIDTH, HEIGHT))
 
-        self.bg_image = pygame.image.load("./graphics/background.png")
+        self.bg_image = pygame.image.load("w4-breakout/breakout v1 (Sprite, paddle, ball)/graphics/background.png")
 
         self.bg_image = pygame.transform.scale(
             self.bg_image, (WIDTH+5, HEIGHT+5))
 
-        self.bg_music = pygame.mixer.Sound('sounds/music.wav')
+        self.bg_music = pygame.mixer.Sound('w4-breakout/breakout v1 (Sprite, paddle, ball)/sounds/music.wav')
 
         g_state_manager.SetScreen(self.screen)
 

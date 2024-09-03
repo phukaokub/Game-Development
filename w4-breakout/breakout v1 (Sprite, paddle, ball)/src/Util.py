@@ -10,12 +10,12 @@ class SpriteManager:
     def __init__(self):
         self.spriteCollection = self.loadSprites(
             [
-                "./sprite/MiddlePaddle.json",
-                "./sprite/SmallPaddle.json",
-                "./sprite/Brick.json",
-                "./sprite/Ball.json",
-                "./sprite/Heart.json",
-                "./sprite/Arrow.json",
+                "w4-breakout/breakout v1 (Sprite, paddle, ball)/sprite/MiddlePaddle.json",
+                "w4-breakout/breakout v1 (Sprite, paddle, ball)/sprite/SmallPaddle.json",
+                "w4-breakout/breakout v1 (Sprite, paddle, ball)/sprite/Brick.json",
+                "w4-breakout/breakout v1 (Sprite, paddle, ball)/sprite/Ball.json",
+                "w4-breakout/breakout v1 (Sprite, paddle, ball)/sprite/Heart.json",
+                "w4-breakout/breakout v1 (Sprite, paddle, ball)/sprite/Arrow.json",
             ]
         )
 

@@ -1,5 +1,5 @@
 {
-    "spriteSheetURL": "./graphics/hearts.png",
+    "spriteSheetURL": "w4-breakout/breakout v1 (Sprite, paddle, ball)/graphics/hearts.png",
     "size":[10,9],
     "sprites":[
         {
