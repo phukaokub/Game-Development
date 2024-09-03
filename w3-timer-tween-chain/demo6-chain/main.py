@@ -15,7 +15,7 @@ MOVE_DURATION = 3
 
 class Bird:
     def __init__(self, x, y, opacity):
-        self.image = pygame.image.load('../image/flappy.png').convert()
+        self.image = pygame.image.load('w3-timer-tween-chain/image/floppy_bird.png').convert()
         self.x = x
         self.y = y
         self.opacity = opacity
@@ -28,7 +28,7 @@ class GameMain:
     def __init__(self):
         self.max_frame_rate = 60
         self.screen = pygame.display.set_mode((WIDTH, HEIGHT))
-        self.image = pygame.image.load('../image/flappy.png')
+        self.image = pygame.image.load('w3-timer-tween-chain/image/floppy_bird.png')
         
         self.timer = 0
         self.flappy_x, self.flappy_y = 0, 0
