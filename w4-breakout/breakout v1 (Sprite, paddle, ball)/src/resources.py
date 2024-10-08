@@ -36,6 +36,7 @@ gSounds = {
     'high-score': pygame.mixer.Sound('w4-breakout/breakout v1 (Sprite, paddle, ball)/sounds/high_score.wav'),
     'brick-hit1': pygame.mixer.Sound('w4-breakout/breakout v1 (Sprite, paddle, ball)/sounds/brick-hit-1.wav'),
     'brick-hit2': pygame.mixer.Sound('w4-breakout/breakout v1 (Sprite, paddle, ball)/sounds/brick-hit-2.wav'),
+    
 }
 
 brick_image_list = [sprite_collection["b_blue_1"].image, sprite_collection["b_blue_2"].image,

@@ -1,0 +1,35 @@
+{
+    "spriteSheetURL": "./graphics/UpgradeIcon.png",
+    "size":[28,28],
+    "sprites":[
+        {
+            "name":"icon1",
+            "x":0,
+            "y":0,
+            "scalefactor":3,
+            "colorKey":-1
+        },
+        {
+            "name":"icon2",
+            "x":28,
+            "y":0,
+            "scalefactor":3,
+            "colorKey":-1
+        },
+        {
+            "name":"icon3",
+            "x":56,
+            "y":0,
+            "scalefactor":3,
+            "colorKey":-1
+        },
+        {
+            "name":"icon4",
+            "x":84,
+            "y":0,
+            "scalefactor":3,
+            "colorKey":-1
+        }
+        ]
+
+}

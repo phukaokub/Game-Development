@@ -1,6 +1,7 @@
 import random, pygame, sys
 from src.states.BaseState import BaseState
 from src.constants import *
+from src.Explode import Explode
 from src.Dependency import *
 import src.CommonRender as CommonRender
 
@@ -8,6 +9,7 @@ class PlayState(BaseState):
     def __init__(self):
         super(PlayState, self).__init__()
         self.paused = False
+        self.skip = False
 
     def Enter(self, params):
         self.paddle = params['paddle']
@@ -23,6 +25,9 @@ class PlayState(BaseState):
         self.ball.dx = random.randint(-600, 600)  # -200 200
         self.ball.dy = random.randint(-180, -150)
 
+        self.powerups = []
+        self.explosions = []
+        self.penBall = None
 
     def update(self,  dt, events):
         for event in events:
@@ -34,14 +39,55 @@ class PlayState(BaseState):
                     self.paused = not self.paused
                     gSounds['pause'].play()
                     #music_channel.play(sounds_list['pause'])
+                if event.key == pygame.K_UP:
+                    g_state_manager.Change('victory', {
+                        'level':self.level,
+                        'paddle':self.paddle,
+                        'health':self.health,
+                        'score':self.score,
+                        'high_scores':self.high_scores,
+                        'ball':self.ball,
+                        'recover_points':self.recover_points
+                    })
+                    #music_channel.play(sounds_list['pause'])
 
         if self.paused:
             return
 
         self.paddle.update(dt)
         self.ball.update(dt)
+        if self.penBall:
+            self.penBall.update(dt)
+        for explosion in self.explosions[:]:
+            explosion.update(dt)
+            del self.explosions[0]
 
+        # Update powerups
+        for powerup in self.powerups[:]:  # Iterate over a copy of the list
+            powerup.update(dt)
+            check = powerup.check_collision_with_paddle(self.paddle)
+            if check:
+                if powerup.type == 0:
+                    self.paddle.powerup_list.append("Bomb")
+                elif powerup.type == 1:
+                    self.paddle.powerup_list.append("Penetrate")
+
+            # Remove powerup if it goes off the screen or is consumed
+            if not powerup.alive:
+                self.powerups.remove(powerup)
+
+        # update ball to powerup
         if self.ball.Collides(self.paddle):
+            # check ball type
+            if self.paddle.powerup_list:
+                if "Bomb" in self.paddle.powerup_list[0]:
+                    del self.paddle.powerup_list[0]
+                    self.ball.type = 1
+                elif "Penetrate" in self.paddle.powerup_list[0]:
+                    del self.paddle.powerup_list[0]
+                    self.ball.type = 2
+                    return
+                
             # raise ball above paddle
             ####can be fixed to make it natural####
             self.ball.rect.y = self.paddle.rect.y - 24
@@ -57,8 +103,14 @@ class PlayState(BaseState):
 
         for k, brick in enumerate(self.bricks):
             if brick.alive and self.ball.Collides(brick):
-                self.score = self.score + (brick.tier * 200 + brick.color * 25)
-                brick.Hit()
+                previous_tier = brick.tier
+                previous_color = brick.color
+                new_powerup, self.penBall, explosion = brick.Hit(self.paddle, self.ball)
+                if new_powerup:
+                    self.powerups.append(new_powerup)
+                if explosion:
+                    self.explosions.append(explosion)
+                self.score = self.calculateScore(brick, previous_tier, previous_color)
 
                 if self.score > self.recover_points:
                     self.health = min(3, self.health + 1)
@@ -67,7 +119,7 @@ class PlayState(BaseState):
                     gSounds['recover'].play()
                     #music_channel.play(sounds_list['recover'])
 
-                if self.CheckVictory():
+                if self.CheckVictory() or self.skip:
                     gSounds['victory'].play()
 
                     g_state_manager.Change('victory', {
@@ -79,6 +131,15 @@ class PlayState(BaseState):
                         'ball':self.ball,
                         'recover_points':self.recover_points
                     })
+                if explosion:
+                    # Apply explosion effect to nearby bricks
+                    for b in self.bricks:
+                        if b.alive and explosion.is_within_radius(b.rect.x + b.width // 2, b.rect.y + b.height // 2):
+                            # Apply damage to the brick
+                            b.Hit(self.paddle, self.ball)
+                    
+                    # Add the explosion to the list of explosions
+                    self.explosions.append(explosion)
 
                 # hit brick from left while moving right -> x flip
                 if self.ball.rect.x + 6 < brick.rect.x and self.ball.dx > 0:
@@ -105,6 +166,33 @@ class PlayState(BaseState):
                     self.ball.dy = self.ball.dy * 1.02
 
                 break
+            elif brick.alive and self.penBall and self.penBall.Collides(brick):
+                previous_tier = brick.tier
+                previous_color = brick.color
+                brick.Hit(self.paddle, self.penBall)
+                self.score = self.calculateScore(brick, previous_tier, previous_color)
+
+                if self.score > self.recover_points:
+                    self.health = min(3, self.health + 1)
+                    self.recover_points = min(100000, self.recover_points * 2)
+
+                    gSounds['recover'].play()
+                    #music_channel.play(sounds_list['recover'])
+
+                if self.CheckVictory() or self.skip:
+                    gSounds['victory'].play()
+
+                    g_state_manager.Change('victory', {
+                        'level':self.level,
+                        'paddle':self.paddle,
+                        'health':self.health,
+                        'score':self.score,
+                        'high_scores':self.high_scores,
+                        'ball':self.ball,
+                        'recover_points': self.recover_points
+                    })
+
+                break
 
         if self.ball.rect.y >= HEIGHT:
             self.health -= 1
@@ -116,6 +204,7 @@ class PlayState(BaseState):
                     'high_scores': self.high_scores
                 })
             else:
+                self.powerups = []
                 g_state_manager.Change('serve', {
                     'level': self.level,
                     'paddle': self.paddle,
@@ -125,6 +214,7 @@ class PlayState(BaseState):
                     'high_scores': self.high_scores,
                     'recover_points': self.recover_points
                 })
+        
 
     def Exit(self):
         pass
@@ -132,6 +222,15 @@ class PlayState(BaseState):
     def render(self, screen):
         for brick in self.bricks:
             brick.render(screen)
+        for powerup in self.powerups:
+            powerup.render(screen)
+        
+        if self.penBall:
+            if self.penBall.alive:
+                self.penBall.render(screen)
+
+        for explosion in self.explosions:
+            explosion.render(screen)
 
         self.paddle.render(screen)
         self.ball.render(screen)
@@ -144,10 +243,24 @@ class PlayState(BaseState):
             rect = t_pause.get_rect(center = (WIDTH/2, HEIGHT/2))
             screen.blit(t_pause, rect)
 
-
     def CheckVictory(self):
         for brick in self.bricks:
             if brick.alive:
                 return False
 
         return True
+
+    def calculateScore(self, brick, previous_tier, previous_color):
+        # Calculate score based on the difference in tiers and colors before and after the hit
+        tier_difference = previous_tier - brick.tier
+        color_difference = previous_color - brick.color
+        
+        # If the brick's tier has changed, add points for both tier and color changes
+        if tier_difference > 0:
+            self.score += (tier_difference * 200) + ((previous_color - 1 + (5 * tier_difference)) * 25)
+        else:
+            # If only the color changed, calculate points based on color change
+            self.score += color_difference * 25
+        
+        return self.score
+

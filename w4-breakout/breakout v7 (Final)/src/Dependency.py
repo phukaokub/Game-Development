@@ -2,7 +2,9 @@ import pygame
 from src.resources import *
 from src.Paddle import Paddle
 from src.Ball import Ball
+from src.PowerUp import PowerUp
 from src.LevelMaker import *
+from src.Upgrade import *
 
 
 from src.StateMachine import StateMachine
@@ -15,3 +17,4 @@ from src.states.VictoryState import VictoryState
 from src.states.EnterHighScoreState import EnterHighScoreState
 from src.states.HighScoreState import HighScoreState
 from src.states.PaddleSelectState import PaddleSelectState
+from src.states.UpgradeState import UpgradeState

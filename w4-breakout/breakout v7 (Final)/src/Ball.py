@@ -3,7 +3,7 @@ from src.constants import *
 from src.Dependency import *
 
 class Ball:
-    def __init__(self, skin=1):
+    def __init__(self, skin=1, type=0):
         self.width = 24
         self.height = 24
 
@@ -14,9 +14,10 @@ class Ball:
 
         self.skin = skin
         self.image = ball_image_list[self.skin]
+        self.type = type
+        self.bomb = bomb_image
+        self.penetrate = penetrate_image
         #self.rect = pygame.Rect(self.x, self.y, self.width, self.height)
-
-
 
     def Collides(self, target):
         if self.rect.x > target.rect.x + target.width or target.rect.x >self.rect.x + self.width:
@@ -62,4 +63,10 @@ class Ball:
         # rect.x rect.y is center?? or is it square box
         # rect = self.image.get_rect()
         # rect.center = (self.rect.x, self.rect.y)
-        screen.blit(self.image, (self.rect.x, self.rect.y))
+        if self.type == 1:
+            screen.blit(self.bomb, (self.rect.x, self.rect.y))
+        elif self.type == 2:
+            screen.blit(self.penetrate, (self.rect.x, self.rect.y))
+        elif self.type == 0:
+            screen.blit(self.image, (self.rect.x, self.rect.y))
+

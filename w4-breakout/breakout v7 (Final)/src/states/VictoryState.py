@@ -1,5 +1,6 @@
 from src.states.BaseState import BaseState
 from src.LevelMaker import LevelMaker
+from src.Upgrade import Upgrade
 import src.CommonRender as CommonRender
 from src.constants import *
 from src.resources import *
@@ -18,6 +19,8 @@ class VictoryState(BaseState):
         self.health = params['health']
         self.score = params['score']
         self.ball = params['ball']
+        self.high_scores = params['high_scores']
+        self.recover_point = params['recover_points']
 
 
     def update(self, dt, events):
@@ -30,13 +33,25 @@ class VictoryState(BaseState):
         for event in events:
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_RETURN:
-                    g_state_manager.Change('serve', {
+                    next_level = self.level + 1  # Ensure next level is calculated
+                    bricks = LevelMaker.CreateMap(next_level)  # Pass the correct level to CreateMap
+                    self.paddle.upgrade_point += Upgrade.calculate_gain_point(self.level, self.score)
+                    
+                    # Ensure bricks are generated, even after retries
+                    if not bricks:
+                        print(f"Warning: No bricks generated for level {next_level}. Retrying.")
+                        bricks = LevelMaker.CreateMap(next_level)
+
+                    g_state_manager.Change('upgrade', {
                         'paddle': self.paddle,
-                        'level': self.level + 1,
-                        'bricks': LevelMaker.CreateMap(self.level + 1),
+                        'bricks': bricks,
                         'health': self.health,
                         'score': self.score,
+                        'high_scores': self.high_scores,
+                        'level': next_level,
+                        'recover_points': self.recover_point,
                     })
+
 
 
     def render(self, screen):

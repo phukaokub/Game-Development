@@ -1,0 +1,41 @@
+{
+    "spriteSheetURL": "./graphics/ui.png",
+    "size":[211,190],
+    "sprites":[
+        {
+            "name":"noselection",
+            "x":0,
+            "y":0,
+            "scalefactor":3,
+            "colorKey":-1
+        },
+        {
+            "name":"selection1",
+            "x":211,
+            "y":0,
+            "scalefactor":3,
+            "colorKey":-1
+        },
+        {
+            "name":"selection2",
+            "x":422,
+            "y":0,
+            "scalefactor":3,
+            "colorKey":-1
+        },
+        {
+            "name":"selection3",
+            "x":633,
+            "y":0,
+            "scalefactor":3,
+            "colorKey":-1
+        },
+        {
+            "name":"selection4",
+            "x":844,
+            "y":0,
+            "scalefactor":3,
+            "colorKey":-1
+        }
+        ]
+}

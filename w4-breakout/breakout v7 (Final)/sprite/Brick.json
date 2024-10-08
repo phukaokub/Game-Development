@@ -88,28 +88,28 @@
         },
         {
             "name":"b_purple_1",
-            "x":64,
+            "x":0,
             "y":32,
             "scalefactor":3,
             "colorKey":-1
         },
         {
             "name":"b_purple_2",
-            "x":96,
+            "x":32,
             "y":32,
             "scalefactor":3,
             "colorKey":-1
         },
         {
             "name":"b_purple_3",
-            "x":128,
+            "x":64,
             "y":32,
             "scalefactor":3,
             "colorKey":-1
         },
         {
             "name":"b_purple_4",
-            "x":160,
+            "x":96,
             "y":32,
             "scalefactor":3,
             "colorKey":-1
@@ -152,6 +152,5 @@
 
 
 ]
+
 }
-
-

@@ -16,6 +16,11 @@ class SpriteManager:
                 "./sprite/Ball.json",
                 "./sprite/Heart.json",
                 "./sprite/Arrow.json",
+                "./sprite/Upgrade.json",
+                "./sprite/UpgradeItem.json",
+                "./sprite/PowerUp.json",
+                "./sprite/BombBall.json",
+                "./sprite/PenetrateBall.json",
             ]
         )
 

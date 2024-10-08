@@ -22,7 +22,12 @@ class ServeState(BaseState):
         self.recover_points = params["recover_points"]
 
         self.ball = Ball(1)
-        self.ball.skin = random.randint(0, 6)
+        self.ball.skin = random.randint(0, 5)
+
+        print(f'paddle item1 level: ', self.paddle.item1_level)
+        print(f'paddle item2 level: ', self.paddle.item2_level)
+        print(f'paddle item3 level: ', self.paddle.item3_level)
+        print(f'paddle item4 level: ', self.paddle.item4_level)
 
     def Exit(self):
         pass

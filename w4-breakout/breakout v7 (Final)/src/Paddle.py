@@ -18,6 +18,14 @@ class Paddle:
 
         self.rect = pygame.Rect(self.x, self.y, self.width, self.height)
 
+        self.item1_level = 0
+        self.item2_level = 0
+        self.item3_level = 0
+        self.item4_level = 0
+
+        self.upgrade_point = 0
+        self.powerup_list = []
+
     def SetImage(self, skin):
         self.skin = skin
         self.image = paddle_image_list[self.skin-1]

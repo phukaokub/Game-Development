@@ -29,11 +29,14 @@ class GameMain:
         self.bg_image = pygame.transform.scale(
             self.bg_image, (WIDTH+5, HEIGHT+5))
 
+
         self.num_dup_images = math.ceil(WIDTH / self.bg_image.get_width()) + 1
+        
         self.scroll = 0
         self.scroll_bg = False
 
         self.bg_music = pygame.mixer.Sound('sounds/music.wav')
+        self.bg_music.set_volume(0.2)  # Set volume to 20%
 
         g_state_manager.SetScreen(self.screen)
 
@@ -45,7 +48,8 @@ class GameMain:
             'victory': VictoryState(),
             'high-scores': HighScoreState(),
             'enter-high-score': EnterHighScoreState(),
-            'paddle-select': PaddleSelectState()
+            'paddle-select': PaddleSelectState(),
+            'upgrade': UpgradeState()
         }
         g_state_manager.SetStates(states)
 
@@ -59,6 +63,7 @@ class GameMain:
 
         file = open(RANK_FILE_NAME, "r+")
         all_lines = file.readlines()
+
         scores = []
 
         name_flip = True

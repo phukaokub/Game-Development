@@ -1,0 +1,13 @@
+{
+    "spriteSheetURL": "./graphics/PenetrateBall.png",
+    "size":[8,8],
+    "sprites":[
+        {
+            "name":"PenetrateBall",
+            "x":0,
+            "y":0,
+            "scalefactor":3,
+            "colorKey":-1
+        }
+    ]
+}

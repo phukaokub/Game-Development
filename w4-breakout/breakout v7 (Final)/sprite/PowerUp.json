@@ -1,0 +1,21 @@
+{
+    "spriteSheetURL": "./graphics/powerup.png",
+    "size":[22,22],
+    "sprites":[
+        {
+            "name":"Bomb",
+            "x":0,
+            "y":0,
+            "scalefactor":3,
+            "colorKey":-1
+        },
+        {
+            "name":"Penetrate",
+            "x":22,
+            "y":0,
+            "scalefactor":3,
+            "colorKey":-1
+        }
+        ]
+
+}
