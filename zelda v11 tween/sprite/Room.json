@@ -1,0 +1,57 @@
+{
+    "spriteSheetURL": "./graphics/tilesheet.png",
+    "type":"none",
+    "size":[16,16],
+    "sprites":[
+        {
+            "name":"heart_0",
+            "x":0,
+            "y":0,
+            "scalefactor":3,
+            "colorKey":-1,
+            "collision":false
+        },
+        {
+            "name":"heart_1",
+            "x":16,
+            "y":0,
+            "scalefactor":3,
+            "colorKey":-1,
+            "collision":false
+        },
+        {
+            "name":"heart_2",
+            "x":32,
+            "y":0,
+            "scalefactor":3,
+            "colorKey":-1,
+            "collision":false
+        },
+        {
+            "name":"heart_3",
+            "x":48,
+            "y":0,
+            "scalefactor":3,
+            "colorKey":-1,
+            "collision":false
+        },
+        {
+            "name":"heart_4",
+            "x":64,
+            "y":0,
+            "scalefactor":3,
+            "colorKey":-1,
+            "collision":false
+        },
+        {
+            "name":"star",
+            "x":80,
+            "y":0,
+            "scalefactor":3,
+            "colorKey":-1,
+            "collision":false
+        }
+]
+}
+
+

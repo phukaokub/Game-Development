@@ -1,0 +1,123 @@
+{
+    "spriteSheetURL": "./graphics/entities.png",
+    "type":"animation",
+    "size":[16,16],
+    "sprites":[
+        {
+            "name":"skeleton_walk_down",
+            "images":[
+                {
+                    "x":144,
+                    "y":0,
+                    "scale":3
+                },
+                {
+                    "x":160,
+                    "y":0,
+                    "scale":3
+                },
+                {
+                    "x":176,
+                    "y":0,
+                    "scale":3
+                }
+			
+            ],
+	       "idle_image":
+			{
+				"x":144,
+				"y":0,
+				"scale":3
+		     },
+            "interval_time":0.6,
+            "colorKey": null
+        },
+        {
+            "name":"skeleton_walk_right",
+            "images":[
+                {
+                    "x":144,
+                    "y":32,
+                    "scale":3
+                },
+                {
+                    "x":160,
+                    "y":32,
+                    "scale":3
+                },
+                {
+                    "x":176,
+                    "y":32,
+                    "scale":3
+                }
+            ],
+	       "idle_image":
+			{
+				"x":144,
+				"y":32,
+				"scale":3
+		     },
+
+            "interval_time":0.6,
+            "colorKey": null
+        },
+        {
+            "name":"skeleton_walk_up",
+            "images":[
+                {
+                    "x":144,
+                    "y":48,
+                    "scale":3
+                },
+                {
+                    "x":160,
+                    "y":48,
+                    "scale":3
+                },
+                {
+                    "x":176,
+                    "y":48,
+                    "scale":3
+                }
+            ],
+	       "idle_image":
+			{
+				"x":144,
+				"y":48,
+				"scale":3
+		     },
+            "interval_time":0.6,
+            "colorKey": null
+        },
+	   {
+            "name":"skeleton_walk_left",
+            "images":[
+                {
+                    "x":144,
+                    "y":16,
+                    "scale":3
+                },
+                {
+                    "x":160,
+                    "y":16,
+                    "scale":3
+                },
+                {
+                    "x":176,
+                    "y":16,
+                    "scale":3
+                }
+            ],
+	       "idle_image":
+			{
+				"x":144,
+				"y":16,
+				"scale":3
+		     },
+
+            "interval_time":0.66,
+            "colorKey": null
+        }
+]
+}
+

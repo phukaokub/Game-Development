@@ -1,0 +1,124 @@
+{
+    "spriteSheetURL": "./graphics/character_swing_sword.png",
+    "type":"animation",
+    "size":[32,32],
+    "sprites":[
+        {
+            "name":"character_attack_down",
+            "images":[
+                {
+                    "x":0,
+                    "y":0,
+                    "scale":3
+                },
+                {
+                    "x":32,
+                    "y":0,
+                    "scale":3
+                },
+                {
+                    "x":64,
+                    "y":0,
+                    "scale":3
+                },
+			{
+                    "x":96,
+                    "y":0,
+                    "scale":3
+                }
+
+            ],
+	 	 "loop":false,
+            "interval_time":0.05,
+            "colorKey": null
+        },
+        {
+            "name":"character_attack_up",
+            "images":[
+                {
+                    "x":0,
+                    "y":32,
+                    "scale":3
+                },
+                {
+                    "x":32,
+                    "y":32,
+                    "scale":3
+                },
+                {
+                    "x":64,
+                    "y":32,
+                    "scale":3
+                },
+			{
+                    "x":96,
+                    "y":32,
+                    "scale":3
+                }
+
+            ],
+	 	 "loop":false,
+            "interval_time":0.05,
+            "colorKey": null
+        },
+        {
+            "name":"character_attack_right",
+            "images":[
+                {
+                    "x":0,
+                    "y":64,
+                    "scale":3
+                },
+                {
+                    "x":32,
+                    "y":64,
+                    "scale":3
+                },
+                {
+                    "x":64,
+                    "y":64,
+                    "scale":3
+                },
+			{
+                    "x":96,
+                    "y":64,
+                    "scale":3
+                }
+
+            ],
+	 	 "loop":false,
+            "interval_time":0.05,
+            "colorKey": null
+        },
+	   {
+            "name":"character_attack_left",
+            "images":[
+                {
+                    "x":0,
+                    "y":96,
+                    "scale":3
+                },
+                {
+                    "x":32,
+                    "y":96,
+                    "scale":3
+                },
+                {
+                    "x":64,
+                    "y":96,
+                    "scale":3
+                },
+			{
+                    "x":96,
+                    "y":96,
+                    "scale":3
+                }
+
+            ],
+	 	 "loop":false,
+            "interval_time":0.05,
+            "colorKey": null
+        }
+]
+}
+

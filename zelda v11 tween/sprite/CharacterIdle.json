@@ -1,0 +1,39 @@
+{
+    "spriteSheetURL": "./graphics/character_walk.png",
+    "type":"character",
+    "size":[16,32],
+    "sprites":[
+        {
+            "name":"character_down",
+            "x":0,
+            "y":0,
+            "scalefactor":3,            
+            "colorKey": -1
+        },
+        
+        {
+            "name":"character_right",
+            "x":0,
+            "y":32,
+            "scalefactor":3,            
+            "colorKey": -1
+        },
+        {
+            "name":"character_up",
+            "x":0,
+            "y":64,
+            "scalefactor":3,            
+            "colorKey": -1
+        },
+
+        {
+            "name":"character_left",
+            "x":0,
+            "y":96,
+            "scalefactor":3,           
+            "colorKey": -1
+        }
+
+]
+}
+
