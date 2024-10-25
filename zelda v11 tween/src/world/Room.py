@@ -117,10 +117,17 @@ class Room:
 
         self.objects.append(switch)
 
+        def pot_collide():
+            if pot.state == "default":
+                pass
+            if pot.state == "destroyed":
+                pass
+        
         for i in range(random.randint(3,6)):                 
             pot = GameObject(GAME_OBJECT_DEFS['pot'],
                     x=random.randint(MAP_RENDER_OFFSET_X + TILE_SIZE, WIDTH - TILE_SIZE * 2 - 16),
                     y=random.randint(MAP_RENDER_OFFSET_Y + TILE_SIZE, HEIGHT - (HEIGHT - MAP_HEIGHT * TILE_SIZE) + MAP_RENDER_OFFSET_Y - TILE_SIZE - 16))
+            pot.on_collide = pot_collide
             self.objects.append(pot)
 
     def update(self, dt, events):

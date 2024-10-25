@@ -15,7 +15,15 @@ gPlayer_animation_list = {"down": sprite_collection["character_walk_down"].anima
                         "attack_down": sprite_collection["character_attack_down"].animation,
                         "attack_right": sprite_collection["character_attack_right"].animation,
                         "attack_up": sprite_collection["character_attack_up"].animation,
-                        "attack_left": sprite_collection["character_attack_left"].animation
+                        "attack_left": sprite_collection["character_attack_left"].animation,
+                        "lift_front": sprite_collection["character_lift_front"].animation,
+                        "lift_back": sprite_collection["character_lift_back"].animation,
+                        "lift_right": sprite_collection["character_lift_right"].animation,
+                        "lift_left": sprite_collection["character_lift_left"].animation,
+                        "lift_walk_front": sprite_collection["character_lift_walk_front"].animation,
+                        "lift_walk_back": sprite_collection["character_lift_walk_back"].animation,
+                        "lift_walk_right": sprite_collection["character_lift_walk_right"].animation,
+                        "lift_walk_left": sprite_collection["character_lift_walk_left"].animation,
 }
 
 gSkeleton_animation_list = {"down": sprite_collection["skeleton_walk_down"].animation,

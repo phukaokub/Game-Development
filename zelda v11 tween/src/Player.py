@@ -1,5 +1,6 @@
 from src.EntityBase import EntityBase
 from src.Dependencies import *
+from src.recourses import *
 
 class Player(EntityBase):
     def __init__(self, conf):
