@@ -31,7 +31,7 @@ gHeart_image_list = [sprite_collection["heart_0"].image,sprite_collection["heart
 gRoom_image_list = Util.GenerateTiles("./graphics/tilesheet.png", 16, 16)
 gDoor_image_list = Util.GenerateTiles("./graphics/tilesheet.png", 16, 16, colorkey=(13, 7, 17, 255))
 gSwitch_image_list = Util.GenerateTiles("./graphics/switches.png", 16, 18)
-gPot_image_list = Util.GenerateTiles("./graphics/tilesheet.png",16,16, colorkey=(255,255,255))
+gPot_image_list = Util.GenerateTiles("./graphics/tilesheet.png",16,16, colorkey=(0,0,0))
 
 gSounds = {
     'music': pygame.mixer.Sound('sounds/music.mp3'),

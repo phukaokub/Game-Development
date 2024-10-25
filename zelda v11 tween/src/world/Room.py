@@ -117,6 +117,12 @@ class Room:
 
         self.objects.append(switch)
 
+        for i in range(random.randint(3,6)):                 
+            pot = GameObject(GAME_OBJECT_DEFS['pot'],
+                    x=random.randint(MAP_RENDER_OFFSET_X + TILE_SIZE, WIDTH - TILE_SIZE * 2 - 16),
+                    y=random.randint(MAP_RENDER_OFFSET_Y + TILE_SIZE, HEIGHT - (HEIGHT - MAP_HEIGHT * TILE_SIZE) + MAP_RENDER_OFFSET_Y - TILE_SIZE - 16))
+            self.objects.append(pot)
+
     def update(self, dt, events):
         if self.adjacent_offset_x != 0 or self.adjacent_offset_y != 0:
             return
