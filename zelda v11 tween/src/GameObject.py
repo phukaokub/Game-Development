@@ -25,5 +25,12 @@ class GameObject:
     def update(self, dt):
         pass
 
-    def render(self, screen, adjacent_offset_x, adjacent_offset_y):
-        screen.blit(self.image[self.state_list[self.state]], (self.x + adjacent_offset_x, self.y + adjacent_offset_y))
+    def render(self, player, screen, adjacent_offset_x, adjacent_offset_y):
+        if self.state == "maxlifted":
+            screen.blit(self.image[self.state_list[self.state]], (player.x, player.y - player.height + 8))
+        else:   
+            screen.blit(self.image[self.state_list[self.state]], (self.x + adjacent_offset_x, self.y + adjacent_offset_y))
+
+    def move_to(self, x, y):
+        self.x = x
+        self.y = y

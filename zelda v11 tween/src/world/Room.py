@@ -176,7 +176,7 @@ class Room:
             doorway.render(screen, self.adjacent_offset_x+x_mod, self.adjacent_offset_y+y_mod)
 
         for object in self.objects:
-            object.render(screen, self.adjacent_offset_x+x_mod, self.adjacent_offset_y+y_mod)
+            object.render(self.player, screen, self.adjacent_offset_x+x_mod, self.adjacent_offset_y+y_mod)
 
 
         if not shifting:

@@ -50,7 +50,8 @@ class PlayerLiftingState(BaseState):
         for object in self.dungeon.current_room.objects:
             if self.player.Collides(object) and object.type == 'pot':
                 gSounds['hit_enemy'].play()
-                self.dungeon.current_room.objects.remove(object)
+                object.move_to(self.player.x, self.player.y - self.player.height + 8)
+                object.state = 'maxlifted'
 
         if self.player.curr_animation.times_played > 0:
             self.player.curr_animation.times_played = 0

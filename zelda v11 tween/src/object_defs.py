@@ -10,8 +10,7 @@ class ObjectConf:
         self.width = width
         self.height = height
 
-#ObjectConf('switch')
-
+    #ObjectConf('switch')
 
 GAME_OBJECT_DEFS = {
     'switch': ObjectConf('switch', gSwitch_image_list, 2, False, "unpressed", {'unpressed':1, 'pressed':0}, width=48, height=48),
