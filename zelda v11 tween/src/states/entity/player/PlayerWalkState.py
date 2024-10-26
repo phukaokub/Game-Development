@@ -17,6 +17,8 @@ class PlayerWalkState(EntityWalkState):
         self.entity.offset_x = 0
 
     def update(self, dt, events):
+        prev_x, prev_y = self.entity.x, self.entity.y
+
         pressedKeys = pygame.key.get_pressed()
         if pressedKeys[pygame.K_LEFT]:
             self.entity.direction = 'left'
@@ -50,9 +52,8 @@ class PlayerWalkState(EntityWalkState):
         #             self.entity.direction = 'down'
         #             self.entity.ChangeAnimation('walk_down')
 
-        #move and bump to the wall check
+        #move and bump to the wall check and pot check
         super().update(dt, events)
-
 
         if self.bumped:
             if self.entity.direction == 'left':

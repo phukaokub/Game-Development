@@ -62,7 +62,7 @@
             "colorKey": null
         },
         {
-            "name":"character_attack_back",
+            "name":"character_lift_back",
             "images":[
                 {
                     "x":0,
@@ -91,7 +91,7 @@
             "colorKey": null
         },
 	   {
-            "name":"character_attack_left",
+            "name":"character_lift_left",
             "images":[
                 {
                     "x":0,
