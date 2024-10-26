@@ -4,7 +4,7 @@
     "size":[16,32],
     "sprites":[
         {
-            "name":"character_lift_walk_front",
+            "name":"character_lift_walk_down",
             "images":[
                 {
                     "x":0,
@@ -62,7 +62,7 @@
             "colorKey": null
         },
         {
-            "name":"character_lift_walk_back",
+            "name":"character_lift_walk_up",
             "images":[
                 {
                     "x":0,

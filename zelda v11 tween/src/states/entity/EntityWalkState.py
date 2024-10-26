@@ -25,8 +25,6 @@ class EntityWalkState(BaseState):
                 #self.entity.rect.x = MAP_RENDER_OFFSET_X + TILE_SIZE
                 self.entity.ChangeCoord(x=MAP_RENDER_OFFSET_X + TILE_SIZE)
                 self.bumped=True
-            # # check pot collision
-            # elif self.entity.rect.x <= self.dungeon.current_room.objects
         elif self.entity.direction == "right":
             self.entity.MoveX(self.entity.walk_speed * dt)
             if self.entity.rect.x + self.entity.width >= WIDTH - TILE_SIZE * 2:

@@ -39,18 +39,8 @@ class PlayerWalkState(EntityWalkState):
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_SPACE:
                     self.entity.ChangeState('swing_sword')
-                # if event.key == pygame.K_LEFT:
-        #             self.entity.direction = 'left'
-        #             self.entity.ChangeAnimation('walk_left')
-        #         elif event.key == pygame.K_RIGHT:
-        #             self.entity.direction = 'right'
-        #             self.entity.ChangeAnimation('walk_right')
-        #         elif event.key == pygame.K_UP:
-        #             self.entity.direction = 'up'
-        #             self.entity.ChangeAnimation('walk_up')
-        #         elif event.key == pygame.K_DOWN:
-        #             self.entity.direction = 'down'
-        #             self.entity.ChangeAnimation('walk_down')
+                elif event.key == pygame.K_f:
+                    self.entity.ChangeState('lift')
 
         #move and bump to the wall check and pot check
         super().update(dt, events)
