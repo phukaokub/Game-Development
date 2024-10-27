@@ -15,6 +15,15 @@ class PlayerThrowingState(BaseState):
         print('throwing')
         self.player.is_lift = False
         direction = self.player.direction
+        throw_speed = 5  # Set the throw speed
+
+        # Set the object's direction and velocity for throwing
+        if hasattr(self.player, 'carrying_object'):
+            self.player.carrying_object.throw(direction, throw_speed)
+            self.player.carrying_object = None
+
+        # Set animation
+        self.player.ChangeAnimation("throw_" + direction)
 
         if direction == 'left':
             hitbox_width = 24
@@ -38,8 +47,6 @@ class PlayerThrowingState(BaseState):
             hitbox_y = self.player.y + self.player.height
 
         self.lifting_hitbox = Hitbox(hitbox_x, hitbox_y, hitbox_width, hitbox_height)
-
-        self.player.ChangeAnimation("throw_"+self.player.direction)
 
     def Exit(self):
         pass

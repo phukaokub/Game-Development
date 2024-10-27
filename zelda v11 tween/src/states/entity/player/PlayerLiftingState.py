@@ -52,6 +52,7 @@ class PlayerLiftingState(BaseState):
                 object.move_to(self.player.x, self.player.y - self.player.height + 8)
                 object.state = 'maxlifted'
                 self.player.is_lift = True
+                self.player.carrying_object = object
 
         if self.player.curr_animation.times_played > 0:
             self.player.curr_animation.times_played = 0
