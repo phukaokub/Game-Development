@@ -8,6 +8,7 @@ class PlayerWalkState(EntityWalkState):
 
         self.entity.ChangeAnimation('down')
         self.dungeon = dungeon
+        self.player = player
 
     def Exit(self):
         pass
@@ -22,25 +23,41 @@ class PlayerWalkState(EntityWalkState):
         pressedKeys = pygame.key.get_pressed()
         if pressedKeys[pygame.K_LEFT]:
             self.entity.direction = 'left'
-            self.entity.ChangeAnimation('left')
+            if self.player.is_lift:
+                self.entity.ChangeAnimation('lift_walk_left')
+            else:
+                self.entity.ChangeAnimation('left')
         elif pressedKeys[pygame.K_RIGHT]:
             self.entity.direction = 'right'
-            self.entity.ChangeAnimation('right')
+            if self.player.is_lift:
+                self.entity.ChangeAnimation('lift_walk_right')
+            else:
+                self.entity.ChangeAnimation('right')
         elif pressedKeys[pygame.K_DOWN]:
             self.entity.direction = 'down'
-            self.entity.ChangeAnimation('down')
+            if self.player.is_lift:
+                self.entity.ChangeAnimation('lift_walk_down')
+            else:
+                self.entity.ChangeAnimation('down')
         elif pressedKeys[pygame.K_UP]:
             self.entity.direction = 'up'
-            self.entity.ChangeAnimation('up')
+            if self.player.is_lift:
+                self.entity.ChangeAnimation('lift_walk_up')
+            else:
+                self.entity.ChangeAnimation('up')
         else:
             self.entity.ChangeState('idle')
 
         for event in events:
             if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_SPACE:
-                    self.entity.ChangeState('swing_sword')
-                elif event.key == pygame.K_f:
-                    self.entity.ChangeState('lift')
+                if self.player.is_lift:
+                    if event.key == pygame.K_SPACE:
+                        self.entity.ChangeState('throw')
+                else:
+                    if event.key == pygame.K_SPACE:
+                        self.entity.ChangeState('swing_sword')
+                    elif event.key == pygame.K_f:
+                        self.entity.ChangeState('lift')
 
         #move and bump to the wall check and pot check
         super().update(dt, events)

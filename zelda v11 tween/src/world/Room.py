@@ -156,10 +156,8 @@ class Room:
                 if object.type == "switch":
                     object.on_collide()
             if object.type == "pot":
-                # for entity in self.entities:
                 if self.player.Collides(object):
-                    print("collide")
-                # self.player.Collides(object)
+                    pass
 
 
 

@@ -27,7 +27,7 @@ class GameObject:
 
     def render(self, player, screen, adjacent_offset_x, adjacent_offset_y):
         if self.state == "maxlifted":
-            screen.blit(self.image[self.state_list[self.state]], (player.x, player.y - player.height + 8))
+            screen.blit(self.image[self.state_list[self.state]], (player.x, player.y - player.height + 28))
         else:   
             screen.blit(self.image[self.state_list[self.state]], (self.x + adjacent_offset_x, self.y + adjacent_offset_y))
 

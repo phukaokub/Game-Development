@@ -96,7 +96,8 @@ class SpriteManager:
                 #"./sprite/CharacterIdle.json",
                 "./sprite/CharacterAttack.json",
                 "./sprite/CharacterPotLift.json",
-                "./sprite/CharacterPotWalk.json"
+                "./sprite/CharacterPotWalk.json",
+                "./sprite/CharacterPotThrow.json",
             ]
         )
 

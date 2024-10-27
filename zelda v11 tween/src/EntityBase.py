@@ -35,6 +35,8 @@ class EntityBase():
         self.state_machine = None
         self.curr_animation = None
 
+        self.is_lift = False
+
 
     def CreateAnimations(self):
         pass

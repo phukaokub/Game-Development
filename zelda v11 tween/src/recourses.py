@@ -24,6 +24,10 @@ gPlayer_animation_list = {"down": sprite_collection["character_walk_down"].anima
                         "lift_walk_down": sprite_collection["character_lift_walk_down"].animation,
                         "lift_walk_right": sprite_collection["character_lift_walk_right"].animation,
                         "lift_walk_left": sprite_collection["character_lift_walk_left"].animation,
+                        "throw_up": sprite_collection["character_throw_up"].animation,
+                        "throw_down": sprite_collection["character_throw_down"].animation,
+                        "throw_right": sprite_collection["character_throw_right"].animation,
+                        "throw_left": sprite_collection["character_throw_left"].animation,
 }
 
 gSkeleton_animation_list = {"down": sprite_collection["skeleton_walk_down"].animation,

@@ -4,10 +4,10 @@
     "size":[16,32],
     "sprites":[
         {
-            "name":"character_lift_down",
+            "name":"character_throw_down",
             "images":[
                 {
-                    "x":0,
+                    "x":32,
                     "y":0,
                     "scale":3
                 },
@@ -17,7 +17,7 @@
                     "scale":3
                 },
                 {
-                    "x":32,
+                    "x":0,
                     "y":0,
                     "scale":3
                 }
@@ -27,10 +27,10 @@
             "colorKey": null
         },
         {
-            "name":"character_lift_right",
+            "name":"character_throw_right",
             "images":[
                 {
-                    "x":0,
+                    "x":32,
                     "y":32,
                     "scale":3
                 },
@@ -40,7 +40,7 @@
                     "scale":3
                 },
                 {
-                    "x":32,
+                    "x":0,
                     "y":32,
                     "scale":3
                 }
@@ -50,10 +50,10 @@
             "colorKey": null
         },
         {
-            "name":"character_lift_up",
+            "name":"character_throw_up",
             "images":[
                 {
-                    "x":0,
+                    "x":32,
                     "y":64,
                     "scale":3
                 },
@@ -63,7 +63,7 @@
                     "scale":3
                 },
                 {
-                    "x":32,
+                    "x":0,
                     "y":64,
                     "scale":3
                 }
@@ -73,10 +73,10 @@
             "colorKey": null
         },
 	   {
-            "name":"character_lift_left",
+            "name":"character_throw_left",
             "images":[
                 {
-                    "x":0,
+                    "x":32,
                     "y":96,
                     "scale":3
                 },
@@ -86,7 +86,7 @@
                     "scale":3
                 },
                 {
-                    "x":32,
+                    "x":0,
                     "y":96,
                     "scale":3
                 }

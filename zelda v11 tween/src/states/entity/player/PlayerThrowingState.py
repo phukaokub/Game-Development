@@ -5,16 +5,15 @@ from src.HitBox import Hitbox
 import pygame
 from src.recourses import *
 
-class PlayerLiftingState(BaseState):
+class PlayerThrowingState(BaseState):
     def __init__(self, player, dungeon=None):
         self.player = player
         self.dungeon = dungeon
 
-        self.player.ChangeAnimation("lift_"+self.player.direction)
-
-
     def Enter(self, params):
         #sounds
+        print('throwing')
+        self.player.is_lift = False
         direction = self.player.direction
 
         if direction == 'left':
@@ -40,19 +39,12 @@ class PlayerLiftingState(BaseState):
 
         self.lifting_hitbox = Hitbox(hitbox_x, hitbox_y, hitbox_width, hitbox_height)
 
-        self.player.ChangeAnimation("lift_"+self.player.direction)
+        self.player.ChangeAnimation("throw_"+self.player.direction)
 
     def Exit(self):
         pass
 
     def update(self, dt, events):
-        for object in self.dungeon.current_room.objects:
-            if self.player.Collides(object) and object.type == 'pot':
-                gSounds['hit_enemy'].play()
-                object.move_to(self.player.x, self.player.y - self.player.height + 8)
-                object.state = 'maxlifted'
-                self.player.is_lift = True
-
         if self.player.curr_animation.times_played > 0:
             self.player.curr_animation.times_played = 0
             self.player.ChangeState("idle")  #check
