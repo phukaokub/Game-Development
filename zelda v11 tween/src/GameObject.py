@@ -1,3 +1,4 @@
+import pygame
 
 class GameObject:
     def __init__(self, conf, x, y):
@@ -17,7 +18,8 @@ class GameObject:
         self.y = y
         self.width = conf.width
         self.height = conf.height
-
+        self.rect = pygame.Rect(self.x, self.y, self.width, self.height)
+        
         self.on_collide = None
         self.is_thrown = False
         self.velocity_x = 0
@@ -28,11 +30,13 @@ class GameObject:
 
     def update(self, dt):
         # If object is thrown, update its position
+        self.rect.x = self.x
+        self.rect.y = self.y
         if self.is_thrown:
             if self.start_x is None and self.start_y is None:
                 self.start_x = self.x
                 self.start_y = self.y
-            self.state = "throwing"
+            self.state = "thrown"
             self.x += self.velocity_x
             self.y += self.velocity_y
 
@@ -48,12 +52,15 @@ class GameObject:
             self.y = player.y - player.height + 28
             screen.blit(self.image[self.state_list[self.state]],
                         (self.x, self.y))
-        elif self.state == "throwing":
+        elif self.state == "thrown":
             screen.blit(self.image[self.state_list[self.state]],
                         (self.x, self.y))
         else:
             screen.blit(self.image[self.state_list[self.state]],
                         (self.x + adjacent_offset_x, self.y + adjacent_offset_y))
+        
+        # render pot hitbox
+        # pygame.draw.rect(screen, (255, 0, 255), pygame.Rect(self.x, self.y, self.width, self.height))
 
     def move_to(self, x, y):
         self.x = x
