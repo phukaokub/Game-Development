@@ -1,5 +1,6 @@
 import pygame
 
+
 class GameObject:
     def __init__(self, conf, x, y):
         self.type = conf.type
@@ -19,7 +20,7 @@ class GameObject:
         self.width = conf.width
         self.height = conf.height
         self.rect = pygame.Rect(self.x, self.y, self.width, self.height)
-        
+
         self.on_collide = None
         self.is_thrown = False
         self.velocity_x = 0
@@ -27,6 +28,8 @@ class GameObject:
 
         self.start_x = None
         self.start_y = None
+
+        self.powerup = None
 
     def update(self, dt):
         # If object is thrown, update its position
@@ -40,17 +43,13 @@ class GameObject:
             self.x += self.velocity_x
             self.y += self.velocity_y
 
-            if abs(self.x - self.start_x) > 300 or abs(self.y - self.start_y) > 300:
-                self.is_thrown = False
-                self.state = "destroyed"
-                self.start_x = None
-                self.start_y = None
-
     def render(self, player, screen, adjacent_offset_x, adjacent_offset_y):
         if self.state == "maxlifted":
             self.x = player.x
             self.y = player.y - player.height + 28
             screen.blit(self.image[self.state_list[self.state]],
+                        (self.x, self.y))
+            screen.blit(self.powerup.image[self.powerup.state_list[self.powerup.state]],
                         (self.x, self.y))
         elif self.state == "thrown":
             screen.blit(self.image[self.state_list[self.state]],
@@ -58,7 +57,7 @@ class GameObject:
         else:
             screen.blit(self.image[self.state_list[self.state]],
                         (self.x + adjacent_offset_x, self.y + adjacent_offset_y))
-        
+
         # render pot hitbox
         # pygame.draw.rect(screen, (255, 0, 255), pygame.Rect(self.x, self.y, self.width, self.height))
 

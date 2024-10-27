@@ -4,6 +4,9 @@ from src.states.BaseState import BaseState
 from src.HitBox import Hitbox
 import pygame
 from src.recourses import *
+from src.GameObject import GameObject
+from src.object_defs import *
+import random
 
 class PlayerLiftingState(BaseState):
     def __init__(self, player, dungeon=None):
@@ -51,6 +54,7 @@ class PlayerLiftingState(BaseState):
                 gSounds['hit_enemy'].play()
                 object.move_to(self.player.x, self.player.y - self.player.height + 8)
                 object.state = 'maxlifted'
+                object.powerup = self.show_powerup(object.x, object.y)
                 self.player.is_lift = True
                 self.player.carrying_object = object
 
@@ -63,4 +67,11 @@ class PlayerLiftingState(BaseState):
         screen.blit(animation, (math.floor(self.player.x - self.player.offset_x), math.floor(self.player.y - self.player.offset_y)))
 
         #hit box debug
-        #pygame.draw.rect(screen, (255, 0, 255), pygame.Rect(self.sword_hitbox.x, self.sword_hitbox.y, self.sword_hitbox.width, self.sword_hitbox.height))
+        #pygame.draw.rect(screen, (255, 0, 255), pygame.Rect(self.sword_hitbox.x, self.sword_hitbox.y, self.sword_hitbox.width, self.sword_hitbox.height)
+
+    def show_powerup(self, x, y):
+        powerup_type = random.choice(['atkUp', 'heal', 'increase_level'])
+        powerup_type = 'heal'
+        powerup_conf = GAME_OBJECT_DEFS[powerup_type]
+        powerup = GameObject(powerup_conf, x, y)
+        return powerup

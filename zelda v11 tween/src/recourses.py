@@ -44,13 +44,15 @@ gRoom_image_list = Util.GenerateTiles("./graphics/tilesheet.png", 16, 16)
 gDoor_image_list = Util.GenerateTiles("./graphics/tilesheet.png", 16, 16, colorkey=(13, 7, 17, 255))
 gSwitch_image_list = Util.GenerateTiles("./graphics/switches.png", 16, 18)
 gPot_image_list = Util.GenerateTiles("./graphics/tilesheet.png",16,16, colorkey=(0,0,0))
+gPowerup_image_list = Util.GenerateTiles("./graphics/Tiny16-ExpandedMaleSprites.png", 16, 16, colorkey = -1)
 
 gSounds = {
     'music': pygame.mixer.Sound('sounds/music.mp3'),
     'sword':  pygame.mixer.Sound('sounds/sword.wav'),
     'hit_enemy':  pygame.mixer.Sound('sounds/hit_enemy.wav'),
     'hit_player':  pygame.mixer.Sound('sounds/hit_player.wav'),
-    'door':  pygame.mixer.Sound('sounds/door.wav')
+    'door':  pygame.mixer.Sound('sounds/door.wav'),
+    'heal':  pygame.mixer.Sound('sounds/heal.wav'),
 }
 
 gFonts = {
@@ -61,5 +63,4 @@ gFonts = {
     'zelda': pygame.font.Font('fonts/zelda.otf', 192),
     'gothic_medium': pygame.font.Font('fonts/GothicPixels.ttf', 48),
     'gothic_large': pygame.font.Font('fonts/GothicPixels.ttf', 96),
-
 }

@@ -133,7 +133,6 @@ class Room:
             if entity.health <= 0:
                 entity.is_dead = True
                 self.entities.remove(entity)
-
             elif not entity.is_dead:
                 entity.ProcessAI({"room":self}, dt)
                 entity.update(dt, events)
@@ -143,22 +142,29 @@ class Room:
                 self.player.Damage(1)
                 self.player.SetInvulnerable(1.5)
 
-        for object in self.objects:
-            object.update(dt)
-            if self.player.Collides(object):
-                if object.type == "switch":
-                    object.on_collide()
-                    
-            # Check collision for pots only if they are thrown
-            if self.entities:
-                for entity in self.entities:
-                    if object.type == "pot" and entity.Collides(object) and object.state == "thrown":
-                        gSounds['hit_enemy'].play()
-                        entity.Damage(2)
-                        object.velocity_x = 0
-                        object.velocity_y = 0
-                        object.state = "destroyed"
-                        object.is_thrown = False
+        for obj in self.objects:
+            obj.update(dt)
+            if self.player.Collides(obj):
+                if obj.type == "switch":
+                    obj.on_collide()
+
+            # Check pot collision for entities and spawn power-up on destruction
+            if obj.type == "pot" and obj.state == "thrown":
+                if any(entity.Collides(obj) for entity in self.entities):
+                    gSounds['hit_enemy'].play()
+                    entity.Damage(2)
+                    obj.velocity_x = 0
+                    obj.velocity_y = 0
+                    obj.state = "destroyed"
+                    obj.is_thrown = False
+                
+                if abs(obj.x - obj.start_x) > 300 or abs(obj.y - obj.start_y) > 300:
+                    obj.is_thrown = False
+                    self.spawn_powerup(obj.powerup)
+                    obj.state = "destroyed"
+                    obj.start_x = None
+                    obj.start_y = None
+                    print("Pot destroyed")
 
 
     def render(self, screen, x_mod, y_mod, shifting):
@@ -183,3 +189,6 @@ class Room:
                     entity.render(self.adjacent_offset_x, self.adjacent_offset_y + y_mod)
             if self.player:
                 self.player.render()
+
+    def spawn_powerup(self, powerup):
+        self.objects.append(powerup)
