@@ -26,7 +26,7 @@ class GameWinState(BaseState):
 
 
     def render(self, screen):
-        t_title = gFonts['zelda'].render("CONGRATULATION", False, (175, 53, 42))
+        t_title = gFonts['zelda'].render("YOU WIN", False, (0, 167, 0))
         rect = t_title.get_rect(center=(WIDTH / 2, HEIGHT / 2 - 144))
         screen.blit(t_title, rect)
 

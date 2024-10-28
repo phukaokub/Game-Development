@@ -107,10 +107,9 @@ class Room:
             self.entities[i].ChangeState("walk")
 
         # Add slime boss
-        if self.player.difficulty % 5 == 0:
+        if self.player.difficulty >= 5:
             type = 'slime'
-
-            for j in range(math.floor(self.player.difficulty / 3)):
+            for j in range(1, random.randint(1, math.floor(self.player.difficulty / 3) + 1)):
                 conf = EntityConf(type=ENTITY_DEFS[type].type,
                                   animation=ENTITY_DEFS[type].animation,
                                   walk_speed=ENTITY_DEFS[type].walk_speed,
@@ -204,13 +203,11 @@ class Room:
                         entity.carrying_object.append(object)
                         entity.carrying_object[i].throw(direction, 5)
                         entity.is_attacked = False
-                        print("number bucket in entity", len(entity.carrying_object))
                         
         for obj in self.objects:
             obj.update(dt)
             # Count the number of 'bucket' type objects
             bucket_count = sum(1 for obj in self.objects if obj.type == 'bucket')
-            print(f"Number of 'bucket' objects: {bucket_count}")
             if self.player.Collides(obj):
                 if obj.type == "switch":
                     obj.on_collide()

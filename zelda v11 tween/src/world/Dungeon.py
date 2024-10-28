@@ -19,6 +19,8 @@ class Dungeon:
 
 
     def BeginShifting(self, shift_x, shift_y):
+        if self.player.difficulty == 10:
+            g_state_manager.Change('game_win')
         self.shifting = True
         self.player.difficulty += 1
         for object in self.current_room.objects:
@@ -69,9 +71,6 @@ class Dungeon:
 
         self.player.is_lift = False
         self.player.carrying_object = None
-
-        if self.player.difficulty == 10:
-            self.player.ChangeState('win')
 
 
     def update(self, dt, events):
