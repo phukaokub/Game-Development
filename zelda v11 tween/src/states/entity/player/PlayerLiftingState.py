@@ -71,7 +71,6 @@ class PlayerLiftingState(BaseState):
 
     def show_powerup(self, x, y):
         powerup_type = random.choice(['atkUp', 'heal', 'increase_level'])
-        powerup_type = 'increase_level'
         powerup_conf = GAME_OBJECT_DEFS[powerup_type]
         powerup = GameObject(powerup_conf, x, y)
         return powerup

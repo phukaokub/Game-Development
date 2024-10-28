@@ -78,6 +78,7 @@ class PlayerAttackState(BaseState):
     def update(self, dt, events):
         for entity in self.dungeon.current_room.entities:
             if entity.Collides(self.sword_hitbox) and not entity.invulnerable:
+                print("attack damage", self.player.attack)
                 entity.Damage(self.player.attack)
                 entity.SetInvulnerable(0.2)
                 gSounds['hit_enemy'].play()

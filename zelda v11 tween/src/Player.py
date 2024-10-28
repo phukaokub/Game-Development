@@ -9,16 +9,17 @@ class Player(EntityBase):
         self.carrying_object = None
         self.attack = 1
         self.level = 1
+        self.difficulty = 1
 
     def update(self, dt, events):
         super().update(dt, events)
 
         if self.level == 1:
-            self.attack = 1
+            self.attack += 0
         elif self.level == 5:
-            self.attack = 2
+            self.attack += 1
         elif self.level == 10:
-            self.attack = 3
+            self.attack += 2
 
     def Collides(self, target):
         y, height = self.y + self.height/2, self.height-self.height/2

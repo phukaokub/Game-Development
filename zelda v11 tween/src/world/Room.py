@@ -18,6 +18,9 @@ class Room:
     def __init__(self, player):
         self.width = MAP_WIDTH
         self.height = MAP_HEIGHT
+        
+        # for collisions
+        self.player = player
 
         self.tiles = []
         self.GenerateWallsAndFloors()
@@ -33,9 +36,6 @@ class Room:
         self.doorways.append(Doorway('botoom', False, self))
         self.doorways.append(Doorway('left', False, self))
         self.doorways.append(Doorway('right', False, self))
-
-        # for collisions
-        self.player = player
 
         # centering the dungeon rendering
         self.render_offset_x = MAP_RENDER_OFFSET_X
@@ -79,16 +79,17 @@ class Room:
     def GenerateEntities(self):
         types = ['skeleton']
 
-        for i in range(NUMBER_OF_MONSTER):
+        for i in range(random.randrange(self.player.difficulty + 2, self.player.difficulty*2 + 2)):
             type = random.choice(types)
 
             conf = EntityConf(animation=ENTITY_DEFS[type].animation,
                               walk_speed=ENTITY_DEFS[type].walk_speed,
+                              health=ENTITY_DEFS[type].health + self.player.difficulty,
                               x=random.randrange(
                                   MAP_RENDER_OFFSET_X+TILE_SIZE, WIDTH - TILE_SIZE * 2 - 48),
                               y=random.randrange(MAP_RENDER_OFFSET_Y+TILE_SIZE, HEIGHT-(
                                   HEIGHT-MAP_HEIGHT*TILE_SIZE)+MAP_RENDER_OFFSET_Y - TILE_SIZE - 48),
-                              width=ENTITY_DEFS[type].width, height=ENTITY_DEFS[type].height, health=ENTITY_DEFS[type].health)
+                              width=ENTITY_DEFS[type].width, height=ENTITY_DEFS[type].height)
 
             self.entities.append(EntityBase(conf))
 
@@ -120,7 +121,7 @@ class Room:
 
         self.objects.append(switch)
 
-        for i in range(random.randint(3, 6)):
+        for i in range(random.randint(1, 3)):
             while True:
                 x = random.randint(MAP_RENDER_OFFSET_X + TILE_SIZE, WIDTH - TILE_SIZE * 2 - 16)
                 y = random.randint(MAP_RENDER_OFFSET_Y + TILE_SIZE, HEIGHT - (HEIGHT - MAP_HEIGHT * TILE_SIZE) + MAP_RENDER_OFFSET_Y - TILE_SIZE - 16)
@@ -139,6 +140,7 @@ class Room:
         for entity in self.entities:
             if entity.health <= 0:
                 entity.is_dead = True
+                self.player.level += 0.25
                 self.entities.remove(entity)
             elif not entity.is_dead:
                 entity.ProcessAI({"room": self}, dt)
@@ -158,7 +160,7 @@ class Room:
                     self.player.health += 1
                     self.objects.remove(obj)
                 if obj.type == "atkUp":
-                    self.player.attack += 1
+                    self.player.attack += 0.5
                     self.objects.remove(obj)
                 if obj.type == "increase_level":
                     self.player.level += 1
@@ -170,7 +172,7 @@ class Room:
                 for entity in self.entities:
                     if entity.Collides(obj) and not entity.is_dead:
                         gSounds['hit_enemy'].play()
-                        entity.Damage(2)
+                        entity.Damage(10)
                         obj.velocity_x = 0
                         obj.velocity_y = 0
                         obj.state = "destroyed"
@@ -213,11 +215,14 @@ class Room:
             if self.player:
                 self.player.render()
         
-        # render player level at top right corner
+        # render player level at top corner
         font = pygame.font.Font(None, 36)
-        text = font.render("Player Level: " + str(self.player.level), True, (255,255,255))
-        screen.blit(text, (180, 15))
+        player_level = font.render("Player Level: " + str(self.player.level), True, (255,255,255))
+        screen.blit(player_level, (180, 15))
 
+        # render player atkUp at top corner
+        player_atkUp = font.render("Player Attack: " + str(self.player.attack), True, (255,255,255))
+        screen.blit(player_atkUp, (400, 15))
 
     def spawn_powerup(self, powerup):
         self.objects.append(powerup)

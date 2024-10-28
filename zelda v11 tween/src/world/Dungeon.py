@@ -18,9 +18,10 @@ class Dungeon:
         self.shifting = False
 
 
-
     def BeginShifting(self, shift_x, shift_y):
         self.shifting = True
+        for object in self.current_room.objects:
+            self.current_room.objects.remove(object)
         self.next_room = Room(self.player)
 
         for doorway in self.next_room.doorways:
@@ -65,6 +66,10 @@ class Dungeon:
         self.current_room.adjacent_offset_x = 0
         self.current_room.adjacent_offset_y = 0
 
+        self.player.difficulty += 1
+        self.player.is_lift = False
+        self.player.carrying_object = None
+
 
     def update(self, dt, events):
         if not self.shifting:
@@ -76,3 +81,8 @@ class Dungeon:
 
         if self.next_room:
             self.next_room.render(screen, -math.floor(self.camera_x), -math.floor(self.camera_y), self.shifting)
+
+        # render difficulty at top corner
+        font = pygame.font.Font(None, 36)
+        difficulty = font.render("Difficulty: " + str(self.player.difficulty), True, (255,255,255))
+        screen.blit(difficulty, (WIDTH - 200, 15))
