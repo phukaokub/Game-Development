@@ -53,6 +53,8 @@ gSounds = {
     'hit_player':  pygame.mixer.Sound('sounds/hit_player.wav'),
     'door':  pygame.mixer.Sound('sounds/door.wav'),
     'heal':  pygame.mixer.Sound('sounds/heal.wav'),
+    'atkUp':  pygame.mixer.Sound('sounds/atkUp.wav'),
+    'increase_level':  pygame.mixer.Sound('sounds/increase_level.wav'),
 }
 
 gFonts = {

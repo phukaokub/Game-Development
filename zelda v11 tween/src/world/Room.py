@@ -162,7 +162,7 @@ class Room:
                     self.objects.remove(obj)
                 if obj.type == "atkUp":
                     gSounds['atkUp'].play()
-                    self.player.attack += 0.5
+                    self.player.atkUp += 0.5
                     self.objects.remove(obj)
                 if obj.type == "increase_level":
                     gSounds['increase_level'].play()
