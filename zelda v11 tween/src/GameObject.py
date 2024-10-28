@@ -35,6 +35,9 @@ class GameObject:
         # If object is thrown, update its position
         self.rect.x = self.x
         self.rect.y = self.y
+        if self.powerup is not None:
+            self.powerup.rect.x = self.powerup.x
+            self.powerup.rect.y = self.powerup.y
         if self.is_thrown:
             if self.start_x is None and self.start_y is None:
                 self.start_x = self.x
@@ -54,6 +57,8 @@ class GameObject:
         elif self.state == "thrown":
             screen.blit(self.image[self.state_list[self.state]],
                         (self.x, self.y))
+            self.powerup.x = self.x
+            self.powerup.y = self.y
         else:
             screen.blit(self.image[self.state_list[self.state]],
                         (self.x + adjacent_offset_x, self.y + adjacent_offset_y))
