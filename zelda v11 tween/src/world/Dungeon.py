@@ -50,7 +50,7 @@ class Dungeon:
             for doorway in self.current_room.doorways:
                 doorway.open = False
 
-            gSounds['door']: play()
+            gSounds['door'].play()
 
         tween.to(self, 'camera_x', shift_x, 1, ease_type='linear')
         tween.to(self, 'camera_y', shift_y, 1, ease_type='linear').on_complete(next)

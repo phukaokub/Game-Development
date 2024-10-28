@@ -157,12 +157,15 @@ class Room:
                 if obj.type == "switch":
                     obj.on_collide()
                 if obj.type == "heal":
+                    gSounds['heal'].play()
                     self.player.health += 1
                     self.objects.remove(obj)
                 if obj.type == "atkUp":
+                    gSounds['atkUp'].play()
                     self.player.attack += 0.5
                     self.objects.remove(obj)
                 if obj.type == "increase_level":
+                    gSounds['increase_level'].play()
                     self.player.level += 1
                     print("player level: ", self.player.level)
                     self.objects.remove(obj)
