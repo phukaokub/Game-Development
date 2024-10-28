@@ -23,5 +23,5 @@ ENTITY_DEFS = {
                          x=WIDTH/2-24, y=HEIGHT/2 -33, width=48, height=66,
                          health=6, offset_x=0, offset_y=15),
     'skeleton':EntityConf('skeleton', animation=gSkeleton_animation_list, width=48, height=48, health=1),
-    'slime':EntityConf('slime', animation=gSlime_animation_list, width=48, height=48, health=10),
+    'slime':EntityConf('slime', animation=gSlime_animation_list, width=48, height=48, health=20),
 }

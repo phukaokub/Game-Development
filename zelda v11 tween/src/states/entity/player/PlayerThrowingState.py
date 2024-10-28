@@ -11,8 +11,6 @@ class PlayerThrowingState(BaseState):
         self.pot_hitbox = None  # Hitbox for the pot
 
     def Enter(self, params):
-        # Sounds
-        print('throwing')
         self.player.is_lift = False
         direction = self.player.direction
         throw_speed = 5  # Set the throw speed

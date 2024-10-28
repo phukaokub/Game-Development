@@ -186,6 +186,23 @@ class Room:
                 self.player.Damage(1)
                 self.player.SetInvulnerable(1.5)
 
+            if entity.type == 'slime':
+                if entity.is_attacked:
+                    for i in range (0,4):
+                        if i == 0:
+                            direction = 'left'
+                        elif i == 1:
+                            direction = 'right'
+                        elif i == 2:
+                            direction = 'up'
+                        elif i == 3:
+                            direction = 'down'
+                        object = GameObject(GAME_OBJECT_DEFS['bucket'], x=entity.x, y=entity.y, direction=direction)
+                        self.objects.append(object)
+                        entity.carrying_object.append(object)
+                        entity.carrying_object[i].throw(direction, 5)
+                        entity.is_attacked = False
+
         for obj in self.objects:
             obj.update(dt)
             if self.player.Collides(obj):
@@ -202,7 +219,6 @@ class Room:
                 if obj.type == "increase_level":
                     gSounds['increase_level'].play()
                     self.player.level += 1
-                    print("player level: ", self.player.level)
                     self.objects.remove(obj)
 
             # Check pot collision for entities and spawn power-up on destruction
@@ -228,6 +244,21 @@ class Room:
                     self.objects.remove(obj)
                     obj.start_x = None
                     obj.start_y = None
+                
+            if obj.type == "bucket" and obj.is_thrown:
+                if self.player.Collides(obj):
+                    self.objects.remove(obj)
+                    entity.carrying_object.remove(obj)
+                    gSounds['hit_player'].play()
+                    self.player.Damage(3)
+                    self.player.SetInvulnerable(1.5)
+                if abs(obj.x - obj.start_x) > 300 or abs(obj.y - obj.start_y) > 300:
+                    obj.is_thrown = False
+                    obj.start_x = None
+                    obj.start_y = None
+                    self.objects.remove(obj)
+                    entity.carrying_object.remove(obj)
+
 
     def render(self, screen, x_mod, y_mod, shifting):
         for y in range(self.height):

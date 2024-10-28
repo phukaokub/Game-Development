@@ -2,7 +2,7 @@ import pygame
 
 
 class GameObject:
-    def __init__(self, conf, x, y):
+    def __init__(self, conf, x, y, direction = None):
         self.type = conf.type
 
         self.image = conf.image
@@ -31,6 +31,8 @@ class GameObject:
 
         self.powerup = None
 
+        self.direction = direction
+
     def update(self, dt):
         # If object is thrown, update its position
         self.rect.x = self.x
@@ -47,18 +49,25 @@ class GameObject:
             self.y += self.velocity_y
 
     def render(self, player, screen, adjacent_offset_x, adjacent_offset_y):
-        if self.state == "maxlifted":
-            self.x = player.x
-            self.y = player.y - player.height + 28
-            screen.blit(self.image[self.state_list[self.state]],
+        if self.type == 'pot':
+            if self.state == "maxlifted":
+                self.x = player.x
+                self.y = player.y - player.height + 28
+                screen.blit(self.image[self.state_list[self.state]],
+                            (self.x, self.y))
+                screen.blit(self.powerup.image[self.powerup.state_list[self.powerup.state]],
+                            (self.x, self.y))
+            elif self.state == "thrown":
+                screen.blit(self.image[self.state_list[self.state]],
+                            (self.x, self.y))
+                self.powerup.x = self.x
+                self.powerup.y = self.y
+            else:
+                screen.blit(self.image[self.state_list[self.state]],
+                        (self.x + adjacent_offset_x, self.y + adjacent_offset_y))
+        elif self.type == 'bucket':
+            screen.blit(self.image[self.state_list['default']],
                         (self.x, self.y))
-            screen.blit(self.powerup.image[self.powerup.state_list[self.powerup.state]],
-                        (self.x, self.y))
-        elif self.state == "thrown":
-            screen.blit(self.image[self.state_list[self.state]],
-                        (self.x, self.y))
-            self.powerup.x = self.x
-            self.powerup.y = self.y
         else:
             screen.blit(self.image[self.state_list[self.state]],
                         (self.x + adjacent_offset_x, self.y + adjacent_offset_y))
@@ -72,7 +81,10 @@ class GameObject:
 
     def throw(self, direction, speed):
         self.is_thrown = True
-        self.y += 64
+        if self.type == 'pot':
+            self.y += 64
+        else:
+            pass
         if direction == 'left':
             self.velocity_x = -speed
             self.velocity_y = 0

@@ -10,6 +10,8 @@ class ObjectConf:
         self.width = width
         self.height = height
 
+        self.direction = None
+
     #ObjectConf('switch')
 
 GAME_OBJECT_DEFS = {

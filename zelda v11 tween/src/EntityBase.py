@@ -14,7 +14,7 @@ class EntityBase():
         self.width = conf.width
         self.height = conf.height
 
-        # sprite offset          check
+        # sprite offset check
         self.offset_x = conf.offset_x or 0
         self.offset_y = conf.offset_y or 0
 
@@ -37,6 +37,9 @@ class EntityBase():
         self.curr_animation = None
 
         self.is_lift = False
+        self.is_attacked = False
+
+        self.carrying_object = []
 
 
     def CreateAnimations(self):

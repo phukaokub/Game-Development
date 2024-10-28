@@ -11,6 +11,7 @@ class SlimeAttackState(BaseState):
         self.attack_delay = 3.0  # Delay between attacks in seconds
         self.attack_timer = 0
         self.is_attacking = False
+        self.slime.is_attacked = False
         # Four hitboxes for each direction
         self.hitboxes = {
             "left": None,
@@ -24,6 +25,8 @@ class SlimeAttackState(BaseState):
         # Reset attack timer and flags
         self.attack_timer = 0
         self.is_attacking = True
+        self.slime.is_attacked = False
+
         # Create hitboxes for all directions
         self.hitboxes["left"] = self.create_hitbox("left")
         self.hitboxes["right"] = self.create_hitbox("right")
@@ -70,6 +73,7 @@ class SlimeAttackState(BaseState):
         # Clear hitboxes and reset attacking flag
         self.hitboxes = { "left": None, "right": None, "up": None, "down": None }
         self.is_attacking = False
+        self.slime.is_attacked = True
 
 
 
