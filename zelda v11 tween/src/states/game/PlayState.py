@@ -12,6 +12,7 @@ from src.states.entity.player.PlayerIdleState import PlayerIdleState
 from src.states.entity.player.PlayerAttackState import PlayerAttackState
 from src.states.entity.player.PlayerLiftingState import PlayerLiftingState
 from src.states.entity.player.PlayerThrowingState import PlayerThrowingState
+from src.states.entity.SlimeAttackState import SlimeAttackState
 from src.StateMachine import StateMachine
 
 from src.world.Dungeon import Dungeon

@@ -9,11 +9,13 @@ class EntityWalkState(BaseState):
         self.entity.ChangeAnimation('down')
         self.dungeon = dungeon
 
-        #AI control
+        # AI control
         self.move_duration = 0
         self.movement_timer = 0
+        self.attack_timer = 0  # Timer for triggering attack based on timing
+        self.attack_interval = 3.0  # Time in seconds between possible attacks
 
-        #hit wall?
+        # Hit wall?
         self.bumped = False
 
     def update(self, dt, events):
@@ -57,11 +59,20 @@ class EntityWalkState(BaseState):
     def ProcessAI(self, params, dt):
         directions = ['left', 'right', 'up', 'down']
 
+        # Increment the attack timer
+        self.attack_timer += dt
+        if self.entity.type == 'slime' and self.attack_timer >= self.attack_interval:
+            # Time to attack
+            self.entity.ChangeState('attack')
+            self.attack_timer = 0  # Reset the timer after attacking
+            return
+
+        # Movement and idle logic (same as before)
         if self.move_duration == 0 or self.bumped:
             self.move_duration = random.randint(0, 5)
             self.entity.direction = random.choice(directions)
             self.entity.ChangeAnimation(self.entity.direction)
-
+        
         elif self.movement_timer > self.move_duration:
             self.movement_timer = 0
             if random.randint(0, 3) == 1:
@@ -71,7 +82,7 @@ class EntityWalkState(BaseState):
                 self.entity.direction = random.choice(directions)
                 self.entity.ChangeAnimation(self.entity.direction)
 
-        self.movement_timer = self.movement_timer+dt
+        self.movement_timer += dt
 
 
     def render(self, screen):

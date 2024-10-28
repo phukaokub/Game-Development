@@ -8,6 +8,7 @@ from src.EntityBase import EntityBase
 from src.entity_defs import EntityConf
 from src.states.entity.EntityIdleState import EntityIdleState
 from src.states.entity.EntityWalkState import EntityWalkState
+from src.states.entity.SlimeAttackState import SlimeAttackState
 from src.StateMachine import StateMachine
 from src.GameObject import GameObject
 from src.object_defs import *
@@ -18,7 +19,7 @@ class Room:
     def __init__(self, player):
         self.width = MAP_WIDTH
         self.height = MAP_HEIGHT
-        
+
         # for collisions
         self.player = player
 
@@ -82,9 +83,11 @@ class Room:
         for i in range(random.randrange(self.player.difficulty + 2, self.player.difficulty*2 + 2)):
             type = random.choice(types)
 
-            conf = EntityConf(animation=ENTITY_DEFS[type].animation,
+            conf = EntityConf(type=ENTITY_DEFS[type].type,
+                              animation=ENTITY_DEFS[type].animation,
                               walk_speed=ENTITY_DEFS[type].walk_speed,
-                              health=ENTITY_DEFS[type].health + self.player.difficulty,
+                              health=ENTITY_DEFS[type].health +
+                              self.player.difficulty,
                               x=random.randrange(
                                   MAP_RENDER_OFFSET_X+TILE_SIZE, WIDTH - TILE_SIZE * 2 - 48),
                               y=random.randrange(MAP_RENDER_OFFSET_Y+TILE_SIZE, HEIGHT-(
@@ -102,20 +105,22 @@ class Room:
             })
 
             self.entities[i].ChangeState("walk")
-        
+
         # Add slime boss
-        if self.player.difficulty == 5:
+        if self.player.difficulty % 5 == 0:
             type = 'slime'
 
             for j in range(math.floor(self.player.difficulty / 3)):
-                conf = EntityConf(animation=ENTITY_DEFS[type].animation,
-                        walk_speed=ENTITY_DEFS[type].walk_speed,
-                        health=ENTITY_DEFS[type].health + math.floor(self.player.difficulty/2),
-                        x=random.randrange(
-                            MAP_RENDER_OFFSET_X+TILE_SIZE, WIDTH - TILE_SIZE * 2 - 48),
-                        y=random.randrange(MAP_RENDER_OFFSET_Y+TILE_SIZE, HEIGHT-(
-                            HEIGHT-MAP_HEIGHT*TILE_SIZE)+MAP_RENDER_OFFSET_Y - TILE_SIZE - 48),
-                        width=ENTITY_DEFS[type].width, height=ENTITY_DEFS[type].height)
+                conf = EntityConf(type=ENTITY_DEFS[type].type,
+                                  animation=ENTITY_DEFS[type].animation,
+                                  walk_speed=ENTITY_DEFS[type].walk_speed,
+                                  health=ENTITY_DEFS[type].health +
+                                  math.floor(self.player.difficulty/2),
+                                  x=random.randrange(
+                    MAP_RENDER_OFFSET_X+TILE_SIZE, WIDTH - TILE_SIZE * 2 - 48),
+                    y=random.randrange(MAP_RENDER_OFFSET_Y+TILE_SIZE, HEIGHT-(
+                        HEIGHT-MAP_HEIGHT*TILE_SIZE)+MAP_RENDER_OFFSET_Y - TILE_SIZE - 48),
+                    width=ENTITY_DEFS[type].width, height=ENTITY_DEFS[type].height)
 
                 slime_entity = EntityBase(conf)
 
@@ -124,7 +129,8 @@ class Room:
                     pygame.display.get_surface())
                 slime_entity.state_machine.SetStates({
                     "walk": EntityWalkState(slime_entity),
-                    "idle": EntityIdleState(slime_entity)
+                    "idle": EntityIdleState(slime_entity),
+                    'attack': SlimeAttackState(slime_entity)
                 })
 
                 slime_entity.ChangeState("walk")
@@ -150,8 +156,10 @@ class Room:
 
         for i in range(random.randint(1, 3)):
             while True:
-                x = random.randint(MAP_RENDER_OFFSET_X + TILE_SIZE, WIDTH - TILE_SIZE * 2 - 16)
-                y = random.randint(MAP_RENDER_OFFSET_Y + TILE_SIZE, HEIGHT - (HEIGHT - MAP_HEIGHT * TILE_SIZE) + MAP_RENDER_OFFSET_Y - TILE_SIZE - 16)
+                x = random.randint(MAP_RENDER_OFFSET_X +
+                                   TILE_SIZE, WIDTH - TILE_SIZE * 2 - 16)
+                y = random.randint(MAP_RENDER_OFFSET_Y + TILE_SIZE, HEIGHT - (
+                    HEIGHT - MAP_HEIGHT * TILE_SIZE) + MAP_RENDER_OFFSET_Y - TILE_SIZE - 16)
                 if not any(obj.x == x and obj.y == y for obj in self.objects):
                     break
 
@@ -244,14 +252,16 @@ class Room:
                                   self.adjacent_offset_y + y_mod)
             if self.player:
                 self.player.render()
-        
+
         # render player level at top corner
         font = pygame.font.Font(None, 36)
-        player_level = font.render("Player Level: " + str(self.player.level), True, (255,255,255))
+        player_level = font.render(
+            "Player Level: " + str(self.player.level), True, (255, 255, 255))
         screen.blit(player_level, (180, 15))
 
         # render player atkUp at top corner
-        player_atkUp = font.render("Player Attack: " + str(self.player.attack), True, (255,255,255))
+        player_atkUp = font.render(
+            "Player Attack: " + str(self.player.attack), True, (255, 255, 255))
         screen.blit(player_atkUp, (400, 15))
 
     def spawn_powerup(self, powerup):

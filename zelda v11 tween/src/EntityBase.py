@@ -4,6 +4,7 @@ import pygame
 
 class EntityBase():
     def __init__(self, conf):
+        self.type = conf.type
         self.direction = 'down'
         self.animation_list = conf.animation
 

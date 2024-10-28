@@ -50,6 +50,7 @@ gRoom_image_list = Util.GenerateTiles("./graphics/tilesheet.png", 16, 16)
 gDoor_image_list = Util.GenerateTiles("./graphics/tilesheet.png", 16, 16, colorkey=(13, 7, 17, 255))
 gSwitch_image_list = Util.GenerateTiles("./graphics/switches.png", 16, 18)
 gPot_image_list = Util.GenerateTiles("./graphics/tilesheet.png",16,16, colorkey=(0,0,0))
+gBucket_image_list = Util.GenerateTiles("./graphics/tilesheet.png", 16, 16, colorkey=(0,0,0))
 gPowerup_image_list = Util.GenerateTiles("./graphics/Tiny16-ExpandedMaleSprites.png", 16, 16, colorkey = -1)
 
 gSounds = {
