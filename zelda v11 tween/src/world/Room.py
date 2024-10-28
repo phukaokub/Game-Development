@@ -109,7 +109,7 @@ class Room:
         # Add slime boss
         if self.player.difficulty >= 5:
             type = 'slime'
-            for j in range(1, random.randint(1, math.floor(self.player.difficulty / 3) + 1)):
+            for j in range(random.randint(1, math.floor(self.player.difficulty / 3) + 1)):
                 conf = EntityConf(type=ENTITY_DEFS[type].type,
                                   animation=ENTITY_DEFS[type].animation,
                                   walk_speed=ENTITY_DEFS[type].walk_speed,
