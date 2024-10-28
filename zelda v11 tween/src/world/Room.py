@@ -102,6 +102,33 @@ class Room:
             })
 
             self.entities[i].ChangeState("walk")
+        
+        # Add slime boss
+        if self.player.difficulty == 5:
+            type = 'slime'
+
+            for j in range(math.floor(self.player.difficulty / 3)):
+                conf = EntityConf(animation=ENTITY_DEFS[type].animation,
+                        walk_speed=ENTITY_DEFS[type].walk_speed,
+                        health=ENTITY_DEFS[type].health + math.floor(self.player.difficulty/2),
+                        x=random.randrange(
+                            MAP_RENDER_OFFSET_X+TILE_SIZE, WIDTH - TILE_SIZE * 2 - 48),
+                        y=random.randrange(MAP_RENDER_OFFSET_Y+TILE_SIZE, HEIGHT-(
+                            HEIGHT-MAP_HEIGHT*TILE_SIZE)+MAP_RENDER_OFFSET_Y - TILE_SIZE - 48),
+                        width=ENTITY_DEFS[type].width, height=ENTITY_DEFS[type].height)
+
+                slime_entity = EntityBase(conf)
+
+                slime_entity.state_machine = StateMachine()
+                slime_entity.state_machine.SetScreen(
+                    pygame.display.get_surface())
+                slime_entity.state_machine.SetStates({
+                    "walk": EntityWalkState(slime_entity),
+                    "idle": EntityIdleState(slime_entity)
+                })
+
+                slime_entity.ChangeState("walk")
+                self.entities.append(slime_entity)
 
     def GenerateObjects(self):
         switch = GameObject(GAME_OBJECT_DEFS['switch'],

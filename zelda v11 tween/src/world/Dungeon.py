@@ -20,6 +20,7 @@ class Dungeon:
 
     def BeginShifting(self, shift_x, shift_y):
         self.shifting = True
+        self.player.difficulty += 1
         for object in self.current_room.objects:
             self.current_room.objects.remove(object)
         self.next_room = Room(self.player)
@@ -66,7 +67,6 @@ class Dungeon:
         self.current_room.adjacent_offset_x = 0
         self.current_room.adjacent_offset_y = 0
 
-        self.player.difficulty += 1
         self.player.is_lift = False
         self.player.carrying_object = None
 

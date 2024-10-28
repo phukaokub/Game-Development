@@ -1,0 +1,123 @@
+{
+    "spriteSheetURL": "./graphics/entities.png",
+    "type":"animation",
+    "size":[16,16],
+    "sprites":[
+        {
+            "name":"slime_walk_down",
+            "images":[
+                {
+                    "x":0,
+                    "y":64,
+                    "scale":3
+                },
+                {
+                    "x":16,
+                    "y":64,
+                    "scale":3
+                },
+                {
+                    "x":32,
+                    "y":64,
+                    "scale":3
+                }
+			
+            ],
+	       "idle_image":
+			{
+				"x":0,
+				"y":64,
+				"scale":3
+		     },
+            "interval_time":0.6,
+            "colorKey": null
+        },
+        {
+            "name":"slime_walk_right",
+            "images":[
+                {
+                    "x":0,
+                    "y":96,
+                    "scale":3
+                },
+                {
+                    "x":16,
+                    "y":96,
+                    "scale":3
+                },
+                {
+                    "x":32,
+                    "y":96,
+                    "scale":3
+                }
+            ],
+	       "idle_image":
+			{
+				"x":0,
+				"y":96,
+				"scale":3
+		     },
+
+            "interval_time":0.6,
+            "colorKey": null
+        },
+        {
+            "name":"slime_walk_up",
+            "images":[
+                {
+                    "x":0,
+                    "y":112,
+                    "scale":3
+                },
+                {
+                    "x":16,
+                    "y":112,
+                    "scale":3
+                },
+                {
+                    "x":32,
+                    "y":112,
+                    "scale":3
+                }
+            ],
+	       "idle_image":
+			{
+				"x":0,
+				"y":112,
+				"scale":3
+		     },
+            "interval_time":0.6,
+            "colorKey": null
+        },
+	   {
+            "name":"slime_walk_left",
+            "images":[
+                {
+                    "x":0,
+                    "y":80,
+                    "scale":3
+                },
+                {
+                    "x":16,
+                    "y":80,
+                    "scale":3
+                },
+                {
+                    "x":32,
+                    "y":80,
+                    "scale":3
+                }
+            ],
+	       "idle_image":
+			{
+				"x":0,
+				"y":80,
+				"scale":3
+		     },
+
+            "interval_time":0.66,
+            "colorKey": null
+        }
+]
+}
+

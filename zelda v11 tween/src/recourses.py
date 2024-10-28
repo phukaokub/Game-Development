@@ -36,6 +36,12 @@ gSkeleton_animation_list = {"down": sprite_collection["skeleton_walk_down"].anim
                          "left": sprite_collection["skeleton_walk_left"].animation,
 }
 
+gSlime_animation_list = {"down": sprite_collection["slime_walk_down"].animation,
+                         "right": sprite_collection["slime_walk_right"].animation,
+                         "up": sprite_collection["slime_walk_up"].animation,
+                         "left": sprite_collection["slime_walk_left"].animation,
+}
+
 
 gHeart_image_list = [sprite_collection["heart_0"].image,sprite_collection["heart_2"].image,
                     sprite_collection["heart_4"].image]
