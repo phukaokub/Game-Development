@@ -24,6 +24,7 @@ class GameMain:
             'start': StartState(),
             'play': PlayState(),
             'game_over': GameOverState(),
+            'game_win': GameWinState()
         }
 
         g_state_manager.SetStates(states)

@@ -10,8 +10,8 @@ class Player(EntityBase):
         self.baseAttack = 1
         self.atkUp = 0
         self.attack = self.baseAttack + self.atkUp
-        self.level = 4.5
-        self.difficulty = 5
+        self.level = 1
+        self.difficulty = 10
 
     def update(self, dt, events):
         super().update(dt, events)

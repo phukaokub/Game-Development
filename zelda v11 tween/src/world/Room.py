@@ -199,12 +199,18 @@ class Room:
                             direction = 'down'
                         object = GameObject(GAME_OBJECT_DEFS['bucket'], x=entity.x, y=entity.y, direction=direction)
                         self.objects.append(object)
+                        if len(entity.carrying_object) == 4:
+                            entity.carrying_object = []
                         entity.carrying_object.append(object)
                         entity.carrying_object[i].throw(direction, 5)
                         entity.is_attacked = False
-
+                        print("number bucket in entity", len(entity.carrying_object))
+                        
         for obj in self.objects:
             obj.update(dt)
+            # Count the number of 'bucket' type objects
+            bucket_count = sum(1 for obj in self.objects if obj.type == 'bucket')
+            print(f"Number of 'bucket' objects: {bucket_count}")
             if self.player.Collides(obj):
                 if obj.type == "switch":
                     obj.on_collide()
@@ -248,7 +254,6 @@ class Room:
             if obj.type == "bucket" and obj.is_thrown:
                 if self.player.Collides(obj):
                     self.objects.remove(obj)
-                    entity.carrying_object.remove(obj)
                     gSounds['hit_player'].play()
                     self.player.Damage(3)
                     self.player.SetInvulnerable(1.5)
@@ -257,7 +262,6 @@ class Room:
                     obj.start_x = None
                     obj.start_y = None
                     self.objects.remove(obj)
-                    entity.carrying_object.remove(obj)
 
 
     def render(self, screen, x_mod, y_mod, shifting):

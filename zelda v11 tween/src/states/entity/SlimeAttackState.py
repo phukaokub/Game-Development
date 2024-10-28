@@ -21,7 +21,6 @@ class SlimeAttackState(BaseState):
         }
 
     def Enter(self, params):
-        print('Slime preparing to attack in all directions')
         # Reset attack timer and flags
         self.attack_timer = 0
         self.is_attacking = True
@@ -69,7 +68,6 @@ class SlimeAttackState(BaseState):
                 pygame.draw.rect(screen, (255, 0, 0), pygame.Rect(hitbox.x, hitbox.y, hitbox.width, hitbox.height), 2)
 
     def Exit(self):
-        print('Exiting SlimeAttackState')
         # Clear hitboxes and reset attacking flag
         self.hitboxes = { "left": None, "right": None, "up": None, "down": None }
         self.is_attacking = False
