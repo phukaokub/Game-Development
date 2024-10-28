@@ -137,7 +137,6 @@ class Room:
         self.player.update(dt, events)
 
         for entity in self.entities:
-            print(entity.health)
             if entity.health <= 0:
                 entity.is_dead = True
                 self.entities.remove(entity)
@@ -157,6 +156,13 @@ class Room:
                     obj.on_collide()
                 if obj.type == "heal":
                     self.player.health += 1
+                    self.objects.remove(obj)
+                if obj.type == "atkUp":
+                    self.player.attack += 1
+                    self.objects.remove(obj)
+                if obj.type == "increase_level":
+                    self.player.level += 1
+                    print("player level: ", self.player.level)
                     self.objects.remove(obj)
 
             # Check pot collision for entities and spawn power-up on destruction
@@ -206,6 +212,12 @@ class Room:
                                   self.adjacent_offset_y + y_mod)
             if self.player:
                 self.player.render()
+        
+        # render player level at top right corner
+        font = pygame.font.Font(None, 36)
+        text = font.render("Player Level: " + str(self.player.level), True, (255,255,255))
+        screen.blit(text, (180, 15))
+
 
     def spawn_powerup(self, powerup):
         self.objects.append(powerup)

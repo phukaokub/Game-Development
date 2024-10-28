@@ -22,25 +22,49 @@ class PlayerAttackState(BaseState):
         direction = self.player.direction
 
         if direction == 'left':
-            hitbox_width = 24
-            hitbox_height = 48
-            hitbox_x = self.player.x - hitbox_width
-            hitbox_y = self.player.y + 6
+            if self.player.level < 5:
+                hitbox_width = 24
+                hitbox_height = 48
+                hitbox_x = self.player.x - hitbox_width
+                hitbox_y = self.player.y + 6
+            else:
+                hitbox_width = 48
+                hitbox_height = 48
+                hitbox_x = self.player.x - hitbox_width
+                hitbox_y = self.player.y + 6
         elif direction == 'right':
-            hitbox_width = 24
-            hitbox_height = 48
-            hitbox_x = self.player.x + self.player.width
-            hitbox_y = self.player.y + 6
+            if self.player.level < 5:
+                hitbox_width = 24
+                hitbox_height = 48
+                hitbox_x = self.player.x + self.player.width
+                hitbox_y = self.player.y + 6
+            else:
+                hitbox_width = 48
+                hitbox_height = 48
+                hitbox_x = self.player.x + self.player.width
+                hitbox_y = self.player.y + 6
         elif direction == 'up':
-            hitbox_width = 48
-            hitbox_height = 24
-            hitbox_x = self.player.x
-            hitbox_y = self.player.y - hitbox_height
+            if self.player.level < 5:
+                hitbox_width = 48
+                hitbox_height = 24
+                hitbox_x = self.player.x
+                hitbox_y = self.player.y - hitbox_height
+            else:
+                hitbox_width = 48
+                hitbox_height = 48
+                hitbox_x = self.player.x
+                hitbox_y = self.player.y - hitbox_height
         elif direction == 'down':
-            hitbox_width = 48
-            hitbox_height = 24
-            hitbox_x = self.player.x
-            hitbox_y = self.player.y + self.player.height
+            if self.player.level < 5:
+                hitbox_width = 48
+                hitbox_height = 24
+                hitbox_x = self.player.x
+                hitbox_y = self.player.y + self.player.height
+            else:
+                hitbox_width = 48
+                hitbox_height = 48
+                hitbox_x = self.player.x
+                hitbox_y = self.player.y + self.player.height
 
         self.sword_hitbox = Hitbox(hitbox_x, hitbox_y, hitbox_width, hitbox_height)
 
@@ -54,7 +78,7 @@ class PlayerAttackState(BaseState):
     def update(self, dt, events):
         for entity in self.dungeon.current_room.entities:
             if entity.Collides(self.sword_hitbox) and not entity.invulnerable:
-                entity.Damage(1)
+                entity.Damage(self.player.attack)
                 entity.SetInvulnerable(0.2)
                 gSounds['hit_enemy'].play()
 
@@ -66,7 +90,6 @@ class PlayerAttackState(BaseState):
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_SPACE:
                     self.player.ChangeState('swing_sword')
-
 
     def render(self, screen):
         animation = self.player.curr_animation.image

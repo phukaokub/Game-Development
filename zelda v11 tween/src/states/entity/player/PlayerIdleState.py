@@ -12,8 +12,6 @@ class PlayerIdleState(EntityIdleState):
         self.entity.offset_x = 0
         super().Enter(params)
         if self.player.is_lift:
-            print('Enter lift idle')
-            print(self.entity.direction)
             self.entity.ChangeAnimation('lift_walk_'+self.entity.direction)
             
 
@@ -27,7 +25,6 @@ class PlayerIdleState(EntityIdleState):
 
         for event in events:
             if event.type == pygame.KEYDOWN:
-                print('player is lift = ', self.player.is_lift)
                 if self.player.is_lift:
                     if event.key == pygame.K_SPACE:
                         self.entity.ChangeState('throw')
